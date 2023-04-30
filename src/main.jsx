@@ -7,6 +7,7 @@ import AuthContext from "./AuthContext/AuthContext";
 import Login from "./Login/Login";
 import Register from "./Register/Register";
 import ForgetPassword from "./Forget Password/ForgetPassword";
+import Details from "./Details/Details";
 
 const router = createBrowserRouter([
   {
@@ -24,6 +25,11 @@ const router = createBrowserRouter([
   {
     path: "/forgetPassword",
     element: <ForgetPassword></ForgetPassword>,
+  },
+  {
+    path: "/details/:_id",
+    element: <Details></Details>,
+    loader: () => fetch("news.json"),
   },
 ]);
 

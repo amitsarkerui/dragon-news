@@ -28,6 +28,13 @@ const logOut = () => {
 };
 const AuthContext = ({ children }) => {
   const [user, setUser] = useState(null);
+  const [news, setData] = useState([]);
+  console.log(news);
+  useEffect(() => {
+    fetch("news.json")
+      .then((res) => res.json())
+      .then((data) => setData(data));
+  }, []);
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
@@ -38,6 +45,7 @@ const AuthContext = ({ children }) => {
   }, []);
   const authInfo = {
     user,
+    news,
     createAccount,
     verifyEmail,
     logIn,

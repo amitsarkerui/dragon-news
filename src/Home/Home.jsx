@@ -5,7 +5,7 @@ import RightSideBar from "../components/Shared/RightSideBar/RightSideBar";
 
 const Home = () => {
   return (
-    <div className="container mx-auto grid grid-cols-1 md:grid-cols-6 gap-4">
+    <div className="mt-6 container mx-auto grid grid-cols-1 md:grid-cols-6 gap-6">
       <div className="col-span-1">
         <LeftSideBar />
       </div>
