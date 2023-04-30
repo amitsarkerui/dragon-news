@@ -4,11 +4,26 @@ import "./index.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Layout from "./components/Layout/Layout.jsx";
 import AuthContext from "./AuthContext/AuthContext";
+import Login from "./Login/Login";
+import Register from "./Register/Register";
+import ForgetPassword from "./Forget Password/ForgetPassword";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Layout></Layout>,
+  },
+  {
+    path: "/login",
+    element: <Login></Login>,
+  },
+  {
+    path: "/register",
+    element: <Register></Register>,
+  },
+  {
+    path: "/forgetPassword",
+    element: <ForgetPassword></ForgetPassword>,
   },
 ]);
 

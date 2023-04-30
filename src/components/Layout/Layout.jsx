@@ -1,9 +1,14 @@
 import React from "react";
+import NavTop from "../../NavTop/NavTop";
+import Navbar from "../../Navbar/Navbar";
+import Home from "../../Home/Home";
 
 const Layout = () => {
   return (
     <div>
-      <h1>This is layout page</h1>
+      <NavTop></NavTop>
+      <Navbar></Navbar>
+      <Home></Home>
     </div>
   );
 };

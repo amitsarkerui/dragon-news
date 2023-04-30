@@ -1,13 +1,51 @@
-import React, { createContext } from "react";
-import { getAuth } from "firebase/auth";
+import React, { createContext, useEffect, useState } from "react";
+import {
+  createUserWithEmailAndPassword,
+  getAuth,
+  onAuthStateChanged,
+  sendEmailVerification,
+  sendPasswordResetEmail,
+  signInWithEmailAndPassword,
+  signOut,
+} from "firebase/auth";
 import app from "../Firebase/Firebase";
-
 const auth = getAuth(app);
-const AuthContextProvider = createContext(null);
+export const AuthContextProvider = createContext(null);
+const createAccount = (email, password) => {
+  return createUserWithEmailAndPassword(auth, email, password);
+};
+const verifyEmail = () => {
+  return sendEmailVerification(auth.currentUser);
+};
+const logIn = (email, password) => {
+  return signInWithEmailAndPassword(auth, email, password);
+};
+const forgetPassword = (email) => {
+  return sendPasswordResetEmail(auth, email);
+};
+const logOut = () => {
+  return signOut(auth);
+};
 const AuthContext = ({ children }) => {
-  const user = { displayName: "Amit" };
+  const [user, setUser] = useState(null);
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser);
+    });
+    return () => {
+      return unsubscribe();
+    };
+  }, []);
+  const authInfo = {
+    user,
+    createAccount,
+    verifyEmail,
+    logIn,
+    forgetPassword,
+    logOut,
+  };
   return (
-    <AuthContextProvider.Provider value={user}>
+    <AuthContextProvider.Provider value={authInfo}>
       {children}
     </AuthContextProvider.Provider>
   );
